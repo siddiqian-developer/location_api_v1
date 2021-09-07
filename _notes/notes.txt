@@ -1,0 +1,15 @@
+Db uri: mongodb+srv://<username>:<password>@cluster0.ckvbf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+Db name: delivery-app-db
+
+Db user: 
+dbEngineer1
+
+Db pw:
+buildGreatServices
+
+Please implement geospatial query in mongodb to return a descending sorted list of documents based on user coordinates. This method should also implement pagination, use mongodb $limit method.
+
+Feel free to simplify the location object in the database if you need to, especially if there is a performance gain.
+
+If you have any questions please contact me anytime! Thank you!
