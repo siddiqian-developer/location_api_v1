@@ -1,7 +1,7 @@
-This application is a nodejs micro service API for using location based functions.
+This application is a nodejs micro service API for location based functions.
 
 To prepare it for use, you will need to install the node module dependencies,
 
-As well as create a .env for your environment variables.
+In the _notes folder, you will find the db uri, and db name. Add this data to .env file to run the project.
 
-Check the _notes folder for a flow diagram, as well as DB information. :) Thank you for your help!
+Check the notes folder for a flow diagram.  :) Thank you for your help!
