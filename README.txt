@@ -18,5 +18,8 @@ https://docs.mongodb.com/manual/geospatial-queries/
 exploring geojson and mongodb
 https://youtu.be/muy9Ls1gbY8
 
-mongodb skip documents
+node-geocoder utility
+https://www.npmjs.com/package/node-geocoder
+
+mongodb skip method
 https://docs.mongodb.com/drivers/node/current/fundamentals/crud/read-operations/skip/
