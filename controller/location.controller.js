@@ -18,6 +18,11 @@ LocationController Methods
     Please use mongodb limit method.
     Thank you!
     */
+    try {
+      const vendors = await LocationDAO.getVendors()
+      res.send(vendors)
+    } catch (e) {
+      res.send({ "error": e })
+    }
   }
-  
 }
