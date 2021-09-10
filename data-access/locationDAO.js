@@ -8,7 +8,7 @@ export default class LocationDAO {
     }
     try {
       //define database collections here
-      vendorsColl = await conn.db(dbName).collection("vendors")
+      vendorsColl = await conn.db(dbName).collection("vendors");
     } catch (e) {
       console.error(
         `Unable to establish collection handles in LocationDAO: ${e}`
@@ -20,11 +20,40 @@ export default class LocationDAO {
   ====================*/
   static async getVendors() {
     try {
-      console.log(vendorsColl)
-      const vendors = await vendorsColl.find().toArray()
-      return vendors
+      // console.log(vendorsColl)
+
+      let userCoordinates = [-73.987049, 40.716457];
+
+      // vendorsColl.createIndex({location: "2dsphere" } )
+
+      // const vendors = await vendorsColl.find().toArray()
+
+      const vendors = await vendorsColl
+        .aggregate([
+          {
+            $geoNear: {
+              near: {
+                type: "Point",
+                coordinates: userCoordinates,
+              },
+              distanceField: "shopDistance",
+              $maxDistance: 400000,
+              spherical: true,
+            },
+          },
+          {
+            $sort: {
+              shopDistance: -1,
+            },
+          },
+        ])
+        .toArray();
+
+      // console.log(await vendors.toArray());
+
+      return vendors;
     } catch (e) {
-      return console.error(`error: ${e}`)
+      return console.error(`error: ${e}`);
     }
   }
   // Write database methods here, call these methods in location.controller.js file :)
