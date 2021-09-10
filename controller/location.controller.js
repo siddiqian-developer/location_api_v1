@@ -1,5 +1,7 @@
 import LocationDAO from "../data-access/locationDAO";
 
+let locationDAO = new LocationDAO();
+
 export default class LocationController {
 /*=================================================
 LocationController Methods
@@ -7,6 +9,13 @@ LocationController Methods
 
   //define location request methods here
   static async getLocalVendors(req, res) {
+
+    console.log("getLocalVendors")
+
+    // extract the location of the customer from the req.body
+    
+    // call the locationDAO's function to get the list of required vendors
+
     /*
     This method accepts geoJSON coordinates in the request body, 
     and return the result of geospatial query from mongodb, 
