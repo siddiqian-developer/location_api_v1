@@ -18,7 +18,7 @@ MongoClient.connect(uri, {
   useUnifiedTopology: true,
 })
   .then(async (client) => {
-    console.log("MongoDB connected");
+    console.log("👏 MongoDB connected");
     await LocationDAO.injectDB(client);
   })
   .catch((e) => {

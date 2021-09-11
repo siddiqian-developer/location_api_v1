@@ -12,6 +12,8 @@ LocationController Methods
 
     console.log("getLocalVendors")
 
+    console.log("req.body", req.body);
+
     // extract the location of the customer from the req.body
     
     // call the locationDAO's function to get the list of required vendors
@@ -28,7 +30,7 @@ LocationController Methods
     Thank you!
     */
     try {
-      const vendors = await LocationDAO.getVendors()
+      const vendors = await LocationDAO.getVendors(req.body.userLocation, req.body.proximityRadius)
       res.send(vendors)
     } catch (e) {
       res.send({ "error": e })

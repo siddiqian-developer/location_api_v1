@@ -18,39 +18,34 @@ export default class LocationDAO {
   /*====================
   Location Access Object Methods
   ====================*/
-  static async getVendors() {
+
+
+
+  // inputParam1: userLocation = geoJSON point sent in request
+  // inputParam2: proximityRadius = distance in meters
+  // output: sorted list of JOSNs of vendors
+  // it adds a property "vendorDistanceFromUser" in each vendor's JSON item 
+  // NOTE: All distances are in meters
+  
+  static async getVendors(userLocation, proximityRadius) {
     try {
-      // console.log(vendorsColl)
-
-      let userCoordinates = [-73.987049, 40.716457];
-
-      // vendorsColl.createIndex({location: "2dsphere" } )
-
-      // const vendors = await vendorsColl.find().toArray()
-
       const vendors = await vendorsColl
         .aggregate([
           {
             $geoNear: {
-              near: {
-                type: "Point",
-                coordinates: userCoordinates,
-              },
-              distanceField: "shopDistance",
-              $maxDistance: 400000,
+              near: userLocation,
+              distanceField: "vendorDistanceFromUser",
+              maxDistance: proximityRadius,
               spherical: true,
             },
           },
           {
             $sort: {
-              shopDistance: -1,
+              vendorDistanceFromUser: -1,
             },
           },
         ])
         .toArray();
-
-      // console.log(await vendors.toArray());
-
       return vendors;
     } catch (e) {
       return console.error(`error: ${e}`);
@@ -60,17 +55,4 @@ export default class LocationDAO {
   // Feel free to simplify the location object in the database, especially if there is a performance gain!
   // Your db username will have admin privileges, if not, please send me a message. Thank you!
 
-  findVendors() {
-    // sample userLocation = [, -73.987049, 40.716457]
-  }
-
-  async findAllVendors() {
-    // console.log("vendorsColl: ", vendorsColl);
-    try {
-      let cursor = await vendorsColl.find({});
-      return await cursor.toArray();
-    } catch (e) {
-      console.error("Error in querying: " + e.message);
-    }
-  }
 }
